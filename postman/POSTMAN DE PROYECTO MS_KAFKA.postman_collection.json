@@ -1,0 +1,116 @@
+{
+  "info": {
+    "_postman_id": "a5879e63-c23e-456d-8b2b-b51e6fb52d4f",
+    "name": "POSTMAN DE PROYECTO MS_KAFKA",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "1842278"
+  },
+  "item": [
+    {
+      "name": "1. Crear Curso",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Spring Boot Masterclass - version 2\",\n  \"description\": \"Learn Spring Boot from scratch\",\n  \"instructor\": \"John Doe\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/courses",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "courses"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "2. Publicar el curso",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/courses/1/publish?price=10",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "courses",
+            "1",
+            "publish"
+          ],
+          "query": [
+            {
+              "key": "price",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CHECKPOINT 3---borrador",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/courses/1/publish?price=10",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "courses",
+            "1",
+            "publish"
+          ],
+          "query": [
+            {
+              "key": "price",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "3. Ver eventos fallidos --borrador",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/admin/dlq",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "admin",
+            "dlq"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
