@@ -5,11 +5,13 @@ import com.tecsup.app.micro.enrollment.application.command.EnrollStudentCommand;
 import com.tecsup.app.micro.enrollment.application.command.EnrollmentCommandHandler;
 import com.tecsup.app.micro.enrollment.application.query.EnrollmentQueryRepository;
 import com.tecsup.app.micro.enrollment.application.query.EnrollmentReadModel;
+import com.tecsup.app.micro.enrollment.application.saga.EnrollmentSagaHandler;
 import com.tecsup.app.micro.enrollment.domain.model.Enrollment;
 import com.tecsup.app.micro.enrollment.infrastructure.dto.EnrollmentRequest;
 import com.tecsup.app.micro.enrollment.infrastructure.dto.EnrollmentResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +24,36 @@ public class EnrollmentController {
     private final EnrollmentCommandHandler enrollmentCommandHandler;
 
     private final EnrollmentQueryRepository enrollmentQueryRepository;
+
+
+
+    // ========================================
+    // SAGA
+    // ========================================
+
+    private final EnrollmentSagaHandler sagaHandler;
+
+    @PostMapping("/request")
+    public ResponseEntity<EnrollmentResponse> requestEnrollment(
+            @RequestBody EnrollmentRequest request) {
+
+        // Iniciar saga
+        String enrollmentId = this.sagaHandler.requestEnrollment(request.getStudentId(),
+                request.getStudentName(),
+                request.getCourseId(),
+                request.getAmount());
+
+        EnrollmentResponse response = EnrollmentResponse.builder()
+                .enrollmentId(enrollmentId)
+                .status("PENDING")
+                .message("Enrollment request is being processed")
+                .build();
+
+        return ResponseEntity
+                .status(HttpStatus.ACCEPTED)
+                .body(response);
+    }
+
 
     /**
      *  Enroll a student in a course
@@ -38,11 +70,12 @@ public class EnrollmentController {
 
         String enrollmentId = enrollmentCommandHandler.enrollStudent(command);
 
-        return ResponseEntity.ok( EnrollmentResponse.builder()
+        // return ResponseEntity.ok(new EnrollmentResponse(enrollmentId));
+        return ResponseEntity.ok(EnrollmentResponse
+                .builder()
                 .enrollmentId(enrollmentId)
-                .status("SUCCESS")
-                .message("Student enrolled successfully")
                 .build());
+
     }
 
     /**
@@ -84,6 +117,7 @@ public class EnrollmentController {
 
         return ResponseEntity.ok(readModel);
     }
+
 
 
 }

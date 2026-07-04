@@ -53,7 +53,6 @@ public class EnrollmentSagaHandler {
             topics = KafkaConfig.PAYMENT_PROCESSED_TOPIC,
             groupId = "enrollment-saga-group"
     )
-
     @Transactional
     public void handlePaymentProcessed(PaymentProcessedEvent event) {
 
