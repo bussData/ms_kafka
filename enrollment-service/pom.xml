@@ -12,9 +12,9 @@
     </parent>
     
     <groupId>com.tecsup.app.micro</groupId>
-    <artifactId>product-service</artifactId>
+    <artifactId>enrollment-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>product-service</name>
+    <name>enrollment-service</name>
     <description>Product Service with Clean Architecture</description>
     
     <properties>
