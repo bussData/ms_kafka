@@ -24,8 +24,7 @@ public class CourseController {
     public ResponseEntity<CourseResponse> createCourse(@RequestBody CreateCourseRequest request) {
         Course course = createCourseUseCase.createCourse(
                 request.getTitle(),
-                request.getDescription(),
-                request.getInstructor()
+                request.getDescription()
         );
         return ResponseEntity.ok(courseResponseMapper.toResponse(course));
     }

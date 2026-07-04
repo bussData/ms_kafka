@@ -7,9 +7,8 @@
 -- Tabla course
 CREATE TABLE courses (
                          id BIGSERIAL PRIMARY KEY,
-                         title VARCHAR(100) NOT NULL,
+                         title VARCHAR(200) NOT NULL,
                          description VARCHAR(100) NOT NULL,
-                         instructor VARCHAR(100),
-                         status VARCHAR(10),
+                         published BOOLEAN DEFAULT FALSE,
                          created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

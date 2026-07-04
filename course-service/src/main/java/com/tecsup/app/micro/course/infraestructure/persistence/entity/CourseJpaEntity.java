@@ -21,10 +21,9 @@ public class CourseJpaEntity {
 
     private String title;
     private String description;
-    private String instructor;
 
-    @Enumerated(EnumType.STRING)
-    private Course.CourseStatus status;
+    @Column(name = "published")
+    private boolean published;
 
     private LocalDateTime createdAt;
 }

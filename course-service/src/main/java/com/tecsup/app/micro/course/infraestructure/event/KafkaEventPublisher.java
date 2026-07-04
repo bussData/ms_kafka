@@ -6,6 +6,7 @@ import com.tecsup.app.micro.course.domain.event.DomainEvent;
 import com.tecsup.app.micro.course.infraestructure.config.KafkaConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 //import pe.edu.tecsup.app.micro.course.domain.event.EnrollmentRequestedEvent;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class KafkaEventPublisher {
 
-   // private final KafkaTemplate<String, DomainEvent> kafkaTemplate;
+    private final KafkaTemplate<String, DomainEvent> kafkaTemplate;
 
     public void publish(DomainEvent event) {
 
@@ -29,11 +30,11 @@ public class KafkaEventPublisher {
 
         //
 
-       /* this.kafkaTemplate.send(
+        this.kafkaTemplate.send(
                 topic,
                 key,
                 event);
-*/
+
     }
 
     private String getTopicFromEvent(DomainEvent event) {

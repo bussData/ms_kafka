@@ -14,43 +14,39 @@ public class Course {
     private Long id;
     private String title;
     private String description;
-    private String instructor;
-    private CourseStatus status;
+    private boolean published;
     private LocalDateTime createdAt;
 
-    public static Course create(String title, String description, String instructor) {
+    public static Course create(String title, String description) {
         if (title == null || title.isBlank()) {
             throw new IllegalArgumentException("title is required");
         }
-        if (instructor == null || instructor.isBlank()) {
-            throw new IllegalArgumentException("instructor is required");
-        }
+
         Course course = new Course();
         course.title = title;
         course.description = description;
-        course.instructor = instructor;
-        course.status = CourseStatus.DRAFT;
+        course.published = false;
         course.createdAt = LocalDateTime.now();
         return course;
     }
 
     public void publish() {
-        if (status != CourseStatus.DRAFT) {
+        if (published==true) {
             throw new IllegalStateException(
-                    "Only DRAFT courses can be published. Current status: " + status);
+                    "Only DRAFT courses can be published. Current status: " + published);
         }
-        this.status = CourseStatus.PUBLISHED;
+        this.published = true;
     }
 
-    public void archive() {
-        if (status != CourseStatus.PUBLISHED) {
+    /*public void archive() {
+        if (!status) {
             throw new IllegalStateException(
                     "Only PUBLISHED courses can be archived. Current status: " + status);
         }
         this.status = CourseStatus.ARCHIVED;
-    }
+    }*/
 
-    public enum CourseStatus {
+    /*public enum CourseStatus {
         DRAFT, PUBLISHED, ARCHIVED
-    }
+    }*/
 }

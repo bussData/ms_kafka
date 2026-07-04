@@ -21,8 +21,8 @@ public class CreateCourseUseCase  {
 
 
     //@Override
-    public Course createCourse(String title, String description, String instructor) {
-        Course course = Course.create(title, description, instructor);
+    public Course createCourse(String title, String description) {
+        Course course = Course.create(title, description);
         Course saved = repository.save(course);
         log.info("Course created: {}", saved.getId());
 
@@ -30,8 +30,7 @@ public class CreateCourseUseCase  {
         CourseCreatedEvent event =
                 new CourseCreatedEvent(
                         saved.getId().toString(),
-                        saved.getTitle(),
-                        saved.getInstructor());
+                        saved.getTitle());
 
         // Publicar el evento
         this.eventPublisher.publish(event);
