@@ -64,6 +64,53 @@
       "response": []
     },
     {
+      "name": "3. Consultar Todos Cursos",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/courses",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "courses"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "4. Consultar Curso por Id",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/courses/6",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "courses",
+            "6"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "CHECKPOINT 3---borrador",
       "request": {
         "method": "PUT",
@@ -92,7 +139,7 @@
       "response": []
     },
     {
-      "name": "3. Ver eventos fallidos --borrador",
+      "name": "Ver eventos fallidos --borrador",
       "request": {
         "method": "GET",
         "header": [],

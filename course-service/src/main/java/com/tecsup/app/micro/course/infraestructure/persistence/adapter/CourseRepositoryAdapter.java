@@ -8,6 +8,7 @@ import com.tecsup.app.micro.course.infraestructure.persistence.entity.CourseJpaE
 import com.tecsup.app.micro.course.infraestructure.persistence.mapper.CourseJpaMapper;
 import com.tecsup.app.micro.course.infraestructure.persistence.repository.JpaCourseRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -27,5 +28,11 @@ public class CourseRepositoryAdapter implements CourseRepository {
     @Override
     public Optional<Course> findById(Long id) {
         return jpaRepository.findById(id).map(mapper::toDomain);
+    }
+
+    @Override
+    public List<Course> findAll() {
+        List<CourseJpaEntity> courses = jpaRepository.findAll();
+        return mapper.toDomain(courses);
     }
 }

@@ -11,6 +11,8 @@ import com.tecsup.app.micro.course.infraestructure.web.dto.CourseResponse;
 import com.tecsup.app.micro.course.infraestructure.web.dto.CreateCourseRequest;
 import com.tecsup.app.micro.course.infraestructure.web.mapper.CourseResponseMapper;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/courses")
 @RequiredArgsConstructor
@@ -32,6 +34,18 @@ public class CourseController {
     @PutMapping("/{id}/publish")
     public ResponseEntity<CourseResponse> publishCourse(@PathVariable Long id) {
         Course course = publishCourseUseCase.publishCourse(id);
+        return ResponseEntity.ok(courseResponseMapper.toResponse(course));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CourseResponse>> findAllCourses() {
+        List<Course> lstCursos = createCourseUseCase.getAllCourses();
+        return ResponseEntity.ok(courseResponseMapper.toResponse(lstCursos));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CourseResponse> findCourseById(@PathVariable Long id) {
+        Course course = createCourseUseCase.getCourseById(id.toString());
         return ResponseEntity.ok(courseResponseMapper.toResponse(course));
     }
 }
