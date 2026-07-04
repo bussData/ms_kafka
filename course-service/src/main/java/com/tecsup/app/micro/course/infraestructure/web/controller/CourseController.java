@@ -1,0 +1,38 @@
+package com.tecsup.app.micro.course.infraestructure.web.controller;
+
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import com.tecsup.app.micro.course.application.usecase.CreateCourseUseCase;
+import com.tecsup.app.micro.course.application.usecase.PublishCourseUseCase;
+import com.tecsup.app.micro.course.domain.model.Course;
+import com.tecsup.app.micro.course.infraestructure.web.dto.CourseResponse;
+import com.tecsup.app.micro.course.infraestructure.web.dto.CreateCourseRequest;
+import com.tecsup.app.micro.course.infraestructure.web.mapper.CourseResponseMapper;
+
+@RestController
+@RequestMapping("/api/courses")
+@RequiredArgsConstructor
+public class CourseController {
+
+    private final CreateCourseUseCase createCourseUseCase;
+    private final PublishCourseUseCase publishCourseUseCase;
+    private final CourseResponseMapper courseResponseMapper;
+
+    @PostMapping
+    public ResponseEntity<CourseResponse> createCourse(@RequestBody CreateCourseRequest request) {
+        Course course = createCourseUseCase.createCourse(
+                request.getTitle(),
+                request.getDescription(),
+                request.getInstructor()
+        );
+        return ResponseEntity.ok(courseResponseMapper.toResponse(course));
+    }
+
+    @PutMapping("/{id}/publish")
+    public ResponseEntity<CourseResponse> publishCourse(@PathVariable Long id) {
+        Course course = publishCourseUseCase.publishCourse(id);
+        return ResponseEntity.ok(courseResponseMapper.toResponse(course));
+    }
+}
