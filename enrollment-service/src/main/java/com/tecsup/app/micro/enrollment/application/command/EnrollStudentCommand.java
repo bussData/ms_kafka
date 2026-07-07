@@ -10,4 +10,5 @@ public class EnrollStudentCommand {
     private final String studentId;
     private final String studentName;
     private final String courseId;
+    private final String status;
 }

@@ -3,7 +3,10 @@ package com.tecsup.app.micro.enrollment.application.command;
 import com.tecsup.app.micro.enrollment.domain.event.LessonCompletedEvent;
 import com.tecsup.app.micro.enrollment.domain.event.StudentEnrolledEvent;
 import com.tecsup.app.micro.enrollment.domain.model.Enrollment;
+import com.tecsup.app.micro.enrollment.domain.repository.EnrollmentRepository;
+import com.tecsup.app.micro.enrollment.infrastructure.client.CursoClient;
 import com.tecsup.app.micro.enrollment.infrastructure.client.UserClient;
+import com.tecsup.app.micro.enrollment.infrastructure.client.dto.CursoDTO;
 import com.tecsup.app.micro.enrollment.infrastructure.client.dto.UserDTO;
 import com.tecsup.app.micro.enrollment.shared.infrastructure.eventsourcing.MemoryEventStore;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +29,8 @@ public class EnrollmentCommandHandler {
      */
 
     private final UserClient userClient;
+    private final CursoClient  cursoClient;
+    private final EnrollmentRepository enrollmentRepository;
 
     /*public EnrollmentCommandHandler(MemoryEventStore eventStore, MemoryEventStore eventStore1, UserClient userClient) {
         this.eventStore = eventStore1;
@@ -34,28 +39,45 @@ public class EnrollmentCommandHandler {
 
     public String enrollStudent(EnrollStudentCommand command) {
 
-        String enrollmentId = "enrollment-" + System.currentTimeMillis();
-
         //validamos usuario:
         UserDTO user = userClient.getUserById(Long.valueOf(command.getStudentId()));
-        log.info("Fetching products for user from userdb: {}", user.getFull_name());
+        log.info("Fetching usuarios for user from userdb: {}", user.getFull_name());
 
+        if(command.getStudentName()!=null && user!=null && !user.getFull_name().contains(command.getStudentName())){
+            throw new RuntimeException("StudentName invalido. No coincide con "+user.getFull_name());
+        }
+        if(user==null){
+            throw new RuntimeException("StudentId invalido, no existe");
+        }
 
         //validamos curso:
+        CursoDTO curso = cursoClient.getCursoById(Long.valueOf(command.getCourseId()));
+        log.info("Fetching cursos for curso from coursedb: {}", curso.getTitle());
+
+        if(curso==null){
+            throw new RuntimeException("CourseId invalido, no existe");
+        }
+
+        Enrollment enroll = Enrollment.create(Long.valueOf(command.getStudentId()), command.getStudentName(),
+                Long.valueOf(command.getCourseId()));
+
+        Enrollment saved = enrollmentRepository.save(enroll);
+        log.info("Enrollment created: {}", saved.getId());
+
 
         // Crear el evento de inscripción
         StudentEnrolledEvent event
                 =  StudentEnrolledEvent.builder()
-                .enrollmentId(enrollmentId)
+                .enrollmentId(saved.getId())
                 .studentId(command.getStudentId())
                 .studentName(command.getStudentName())
                 .courseId(command.getCourseId())
                 .build();
 
         //
-        this.eventStore.save(enrollmentId, event);
+        this.eventStore.save(saved.getId(), event);
 
-        return enrollmentId;
+        return saved.getId();
 
     }
 

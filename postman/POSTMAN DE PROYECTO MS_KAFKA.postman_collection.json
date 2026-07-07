@@ -131,6 +131,35 @@
       "response": []
     },
     {
+      "name": "6. Crear matricula",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"studentId\":\"2\",\r\n    \"studentName\":\"Diana\",\r\n    \"courseId\":\"9\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8082/api/enrollments",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "enrollments"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "CHECKPOINT 3---borrador",
       "request": {
         "method": "PUT",
