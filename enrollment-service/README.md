@@ -140,7 +140,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=en_US.UTF-8"
     ports:
-      - "5433:5432"  # Puerto externo 5433, interno 5432
+      - "5440:5432"  # Puerto externo 5433, interno 5432
     volumes:
       - postgres-product-data:/var/lib/postgresql/data
     healthcheck:

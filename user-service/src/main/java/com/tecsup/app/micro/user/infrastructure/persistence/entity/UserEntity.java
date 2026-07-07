@@ -29,32 +29,22 @@ public class UserEntity {
     private Long id;
     
     @Column(nullable = false, length = 100)
-    private String name;
+    private String full_name;
     
     @Column(nullable = false, unique = true, length = 100)
     private String email;
     
-    @Column(length = 20)
-    private String phone;
-    
-    @Column(length = 255)
-    private String address;
+
+    @Column(length = 100)
+    private String status;
     
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
-    
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-    
+
     @PrePersist
     protected void onCreate() {
         LocalDateTime now = LocalDateTime.now();
         createdAt = now;
-        updatedAt = now;
     }
-    
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
+
 }

@@ -3,12 +3,17 @@ package com.tecsup.app.micro.enrollment.application.command;
 import com.tecsup.app.micro.enrollment.domain.event.LessonCompletedEvent;
 import com.tecsup.app.micro.enrollment.domain.event.StudentEnrolledEvent;
 import com.tecsup.app.micro.enrollment.domain.model.Enrollment;
+import com.tecsup.app.micro.enrollment.infrastructure.client.UserClient;
+import com.tecsup.app.micro.enrollment.infrastructure.client.dto.UserDTO;
 import com.tecsup.app.micro.enrollment.shared.infrastructure.eventsourcing.MemoryEventStore;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 
 @Slf4j
+@Service
 @RequiredArgsConstructor
 public class EnrollmentCommandHandler {
 
@@ -19,9 +24,24 @@ public class EnrollmentCommandHandler {
      * @param command datos enviado por el controlador
      * @return
      */
+
+    private final UserClient userClient;
+
+    /*public EnrollmentCommandHandler(MemoryEventStore eventStore, MemoryEventStore eventStore1, UserClient userClient) {
+        this.eventStore = eventStore1;
+        this.userClient = userClient;
+    }*/
+
     public String enrollStudent(EnrollStudentCommand command) {
 
         String enrollmentId = "enrollment-" + System.currentTimeMillis();
+
+        //validamos usuario:
+        UserDTO user = userClient.getUserById(Long.valueOf(command.getStudentId()));
+        log.info("Fetching products for user from userdb: {}", user.getFull_name());
+
+
+        //validamos curso:
 
         // Crear el evento de inscripción
         StudentEnrolledEvent event

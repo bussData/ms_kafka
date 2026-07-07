@@ -25,10 +25,4 @@ public class UpdateUserRequest {
     @Email(message = "Email must be valid")
     @Size(max = 100, message = "Email must not exceed 100 characters")
     private String email;
-    
-    @Size(max = 20, message = "Phone must not exceed 20 characters")
-    private String phone;
-    
-    @Size(max = 255, message = "Address must not exceed 255 characters")
-    private String address;
 }
