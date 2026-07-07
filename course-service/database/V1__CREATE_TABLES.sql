@@ -27,3 +27,11 @@ INSERT INTO users (full_name, email, status) VALUES ('Juan Perez', 'juan.perez@e
 INSERT INTO users (full_name, email, status) VALUES ('Jhon Rodriguez', 'jrodriguez@example.com', 'ACTIVE');
 INSERT INTO users (full_name, email, status) VALUES ('Diana Tolentino', 'dtolentino@example.com', 'ACTIVE');
 commit;
+
+CREATE TABLE enrollments (
+                             id BIGSERIAL PRIMARY KEY,
+                             user_id BIGINT NOT NULL,
+                             course_id BIGINT NOT NULL,
+                             status VARCHAR(40) DEFAULT 'PENDING_PAYMENT',
+                             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
