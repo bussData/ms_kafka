@@ -1,24 +1,15 @@
-package com.tecsup.app.micro.user.infrastructure.web.dto;
+package com.tecsup.app.micro.enrollment.infrastructure.client.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
-/**
- * DTO de respuesta de usuario
- */
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserResponse {
-    
+public class UserDTO {
     private Long id;
     private String full_name;
     private String email;
     private String status;
-    private LocalDateTime createdAt;
 }

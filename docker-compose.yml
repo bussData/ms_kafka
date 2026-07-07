@@ -21,26 +21,26 @@ services:
     restart: unless-stopped
 
   # PostgreSQL para Product Service
-  postgres-product-dev:
-    image: postgres:15-alpine
-    container_name: postgres-product-dev
-    environment:
-      POSTGRES_DB: productdb
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=en_US.UTF-8"
-    ports:
-      - "5433:5432"  # Puerto externo 5433, interno 5432
-    volumes:
-      - postgres-product-dev-data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d productdb"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    restart: unless-stopped
+  #postgres-product-dev:
+  #  image: postgres:15-alpine
+  #  container_name: postgres-product-dev
+  #  environment:
+  #   POSTGRES_DB: productdb
+  #    POSTGRES_USER: postgres
+  #    POSTGRES_PASSWORD: postgres
+  #    POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=en_US.UTF-8"
+  #  ports:
+  #    - "5433:5432"  # Puerto externo 5433, interno 5432
+  #  volumes:
+  #    - postgres-product-dev-data:/var/lib/postgresql/data
+  #  healthcheck:
+  #    test: ["CMD-SHELL", "pg_isready -U postgres -d productdb"]
+  #    interval: 10s
+  #    timeout: 5s
+  #    retries: 5
+  #restart: unless-stopped
 
-  # PostgreSQL para Product Service
+  # PostgreSQL para Course Service
   postgres-course-dev:
     image: postgres:15-alpine
     container_name: postgres-course-dev
@@ -60,6 +60,25 @@ services:
       retries: 5
     restart: unless-stopped
 
+  # PostgreSQL para User Service
+  postgres-enrollment-dev:
+    image: postgres:15-alpine
+    container_name: postgres-enrollment-dev
+    environment:
+      POSTGRES_DB: enrollmentdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=en_US.UTF-8"
+    ports:
+      - "5438:5432"
+    volumes:
+      - postgres-enrollment-dev-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d enrollmentdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
   # ==========================================
   # Zookeeper
   # ==========================================
@@ -143,18 +162,20 @@ services:
       - pgadmin-data:/var/lib/pgadmin
     depends_on:
       - postgres-user-dev
-      - postgres-product-dev
+      #- postgres-product-dev
     restart: unless-stopped
 
 
 volumes:
   postgres-user-dev-data:
     driver: local
-  postgres-product-dev-data:  
-    driver: local
+  #postgres-product-dev-data:
+  #  driver: local
   postgres-course-dev-data:
     driver: local
   pgadmin-data:
+    driver: local
+  postgres-enrollment-dev-data:
     driver: local
 
   zookeeper-data:

@@ -39,10 +39,9 @@ public class UpdateUserUseCase {
         }
         
         // Actualizar campos
-        existingUser.setName(userDetails.getName());
+        existingUser.setFull_name(userDetails.getFull_name());
         existingUser.setEmail(userDetails.getEmail());
-        existingUser.setPhone(userDetails.getPhone());
-        existingUser.setAddress(userDetails.getAddress());
+        existingUser.setStatus(userDetails.getStatus());
         
         // Guardar cambios
         User updatedUser = userRepository.save(existingUser);

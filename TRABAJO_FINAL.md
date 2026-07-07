@@ -83,13 +83,13 @@ Incluye:
 
 ## Tabla 1. Microservicios y responsabilidades
 
-| Microservicio | Responsabilidad | Persistencia sugerida |
-|---|---|---|
-| course-service | Gestión de cursos | coursedb |
-| enrollment-service | Gestión de matrículas | enrollmentdb |
-| payment-service | Gestión de pagos | paymentdb |
-| notification-service | Notificaciones por eventos | notificationdb |
-| user-service | Gestión de usuarios | userdb |
+| Microservicio | Responsabilidad | Persistencia sugerida | Puerto |
+|---|---|---|---|
+| course-service | Gestión de cursos | coursedb | 5436 |
+| enrollment-service | Gestión de matrículas | enrollmentdb | 5438 |
+| payment-service | Gestión de pagos | paymentdb | |
+| notification-service | Notificaciones por eventos | notificationdb | |
+| user-service | Gestión de usuarios | userdb | 5434 |
 
 ---
 
