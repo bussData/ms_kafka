@@ -1,4 +1,4 @@
-package com.tecsup.app.micro.enrollment.shared.infrastructure.config;
+package com.tecsup.app.micro.notifications.shared.infrastructure.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;
