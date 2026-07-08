@@ -41,6 +41,11 @@ public class EnrollmentQueryRepository {
 
     }
 
+    public Enrollment findByEnrollmentId2(String enrollmentId) {
+
+        return this.enrollmentRepository.getEnrollmentById(enrollmentId);
+
+    }
 
     /**
      *

@@ -110,13 +110,12 @@ public class EnrollmentController {
     // CQRS Implementation
 
     @GetMapping("/{id}")
-    public ResponseEntity<EnrollmentReadModel> getEnrollment(@PathVariable String id) {
+    public ResponseEntity<Enrollment> getEnrollment(@PathVariable String id) {
 
-        EnrollmentReadModel readModel
-                = this.enrollmentQueryRepository.findByEnrollmentId(id)
-                .orElseThrow(() -> new RuntimeException("No enrollment with id " + id));
+        Enrollment enroll
+                = this.enrollmentQueryRepository.findByEnrollmentId2(id);
 
-        return ResponseEntity.ok(readModel);
+        return ResponseEntity.ok(enroll);
     }
 
 

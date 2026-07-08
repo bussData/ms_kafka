@@ -47,3 +47,4 @@ public class EnrollmentRepositoryAdapter implements EnrollmentRepository {
         return mapper.toDomain(entity);
     }
 }
+
