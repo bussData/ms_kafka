@@ -169,15 +169,17 @@ services:
 volumes:
   postgres-user-dev-data:
     driver: local
-  #postgres-product-dev-data:
-  #  driver: local
   postgres-course-dev-data:
-    driver: local
-  pgadmin-data:
     driver: local
   postgres-enrollment-dev-data:
     driver: local
-
+  postgres-payment-dev-data:
+    driver: local
+  postgres-notification-dev-data:
+    driver: local
+  pgadmin-data:
+    driver: local
+        
   zookeeper-data:
   zookeeper-logs:
   kafka-data:
