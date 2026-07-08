@@ -17,10 +17,10 @@ import org.springframework.stereotype.Component;
 public class CourseEventHandler {
 
     //@EventListener
-    @KafkaListener(
+    /*@KafkaListener(
          topics = KafkaConfig.COURSE_EVENTS_TOPIC,      // Topico que va a escuchando
          groupId = "course-notifications-group"         // Grupo de consumidores
-    )
+    )*/
      public void handleCourseEvents(DomainEvent event) {
         if (event instanceof CourseCreatedEvent) {
             this.handleCourseCreated((CourseCreatedEvent) event);

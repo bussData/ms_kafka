@@ -1,7 +1,6 @@
 package com.tecsup.app.micro.notifications.application.eventhandler;
 
-import com.tecsup.app.micro.notifications.domain.CourseCreatedEvent;
-import com.tecsup.app.micro.notifications.domain.CoursePublishedEvent;
+import com.tecsup.app.micro.notifications.domain.EnrollmentCreatedEvent;
 import com.tecsup.app.micro.notifications.shared.domain.event.DomainEvent;
 import com.tecsup.app.micro.notifications.shared.infrastructure.config.KafkaConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -17,27 +16,21 @@ public class EnrollmentEventHandler {
 
     //@EventListener
     @KafkaListener(
-            topics = KafkaConfig.COURSE_EVENTS_TOPIC,      // Topico que va a escuchando
-            groupId = "course-notifications-group"         // Grupo de consumidores
+            topics = KafkaConfig.ENROLLMENT_EVENTS_TOPIC,      // Topico que va a escuchando
+            groupId = "enrollment-notifications-group"         // Grupo de consumidores
     )
     public void handleCourseEvents(DomainEvent event) {
-        if (event instanceof CourseCreatedEvent) {
-            this.handleCourseCreated((CourseCreatedEvent) event);
-        } else if (event instanceof CoursePublishedEvent) {
-            this.handleCoursePublished((CoursePublishedEvent) event);
-        } else {
+        if (event instanceof EnrollmentCreatedEvent) {
+            this.handleEnrollmentCreated((EnrollmentCreatedEvent) event);
+        }  else {
             throw new RuntimeException("Invalid event type " + event.getClass());
         }
     }
 
-    private void handleCoursePublished(CoursePublishedEvent event) {
-        log.info("[Kafka] Course published event received: {}", event);
 
-    }
-
-    public void handleCourseCreated(CourseCreatedEvent event)
+    public void handleEnrollmentCreated(EnrollmentCreatedEvent event)
     {
-        log.info("[Kafka] Course created event received: {}", event);
+        log.info("[Kafka] MATRICULA realizada: {}", event);
 
     }
 }

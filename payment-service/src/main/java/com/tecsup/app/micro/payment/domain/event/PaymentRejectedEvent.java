@@ -6,22 +6,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentProcessedEvent extends DomainEvent {
+public class PaymentRejectedEvent extends DomainEvent {
 
     private String enrollmentId;
-    private String transactionId;
-    private BigDecimal amount;
+    private String reason;
+    private String errorCode;
     private LocalDateTime timestamp;
 
     @Override
     public String getKey() {
         return enrollmentId;
     }
-
 }

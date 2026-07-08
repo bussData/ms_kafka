@@ -20,7 +20,8 @@ public class KafkaConfig {
 
     // SAGA
     public static final String ENROLLMENT_REQUEST_TOPIC = "enrollment.requested";
-
+    public static final String ENROLLMENT_EVENTS_TOPIC = "enrollment.events";
+    public static final String ENROLLMENT_UPDATE_TOPIC = "enrollment.update";
     public static final String PAYMENT_PROCESSED_TOPIC = "payment.processed";   // AGREGAR
 
     public static final String PAYMENT_FAILED_TOPIC = "payment.failed";  // AGREGAR
@@ -40,6 +41,26 @@ public class KafkaConfig {
                 (short) 1  // Nro. de replicas
         );
     }
+
+    @Bean
+    public NewTopic enrollmentEventsTopic() {
+        return TopicBuilder
+                .name(ENROLLMENT_EVENTS_TOPIC)
+                .partitions(3)
+                .replicas(1)
+                .build();
+    }
+
+    @Bean
+    public NewTopic enrollmentUpdateTopic() {
+        return TopicBuilder
+                .name(ENROLLMENT_UPDATE_TOPIC)
+                .partitions(3)
+                .replicas(1)
+                .build();
+    }
+
+
 
     // DLQ
     @Bean

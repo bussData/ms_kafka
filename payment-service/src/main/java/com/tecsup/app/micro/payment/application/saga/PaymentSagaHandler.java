@@ -1,8 +1,8 @@
 package com.tecsup.app.micro.payment.application.saga;
 
 import com.tecsup.app.micro.payment.domain.event.EnrollmentRequestedEvent;
-import com.tecsup.app.micro.payment.domain.event.PaymentFailedEvent;
-import com.tecsup.app.micro.payment.domain.event.PaymentProcessedEvent;
+import com.tecsup.app.micro.payment.domain.event.PaymentRejectedEvent;
+import com.tecsup.app.micro.payment.domain.event.PaymentApprovedEvent;
 import com.tecsup.app.micro.payment.shared.infrastructure.config.KafkaConfig;
 import com.tecsup.app.micro.payment.shared.infrastructure.event.KafkaEventPublisher;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +40,7 @@ public class PaymentSagaHandler {
 
             Thread.sleep(1000 + random.nextInt(2000)); // 1-3 segundos
 
-            boolean paymentSuccess = false; // random.nextInt(100) < 60;
+            boolean paymentSuccess =  random.nextInt(100) < 60;
 
             if(paymentSuccess) {
                 log.info("[PAYMENT] Pago procesado exitosamente para enrollment ID: {}", event.getEnrollmentId());
@@ -49,7 +49,7 @@ public class PaymentSagaHandler {
                 String transactionId = "tx-" + UUID.randomUUID();
 
                 // Generar el evento
-                PaymentProcessedEvent processedEvent = new PaymentProcessedEvent(
+                PaymentApprovedEvent processedEvent = new PaymentApprovedEvent(
                         event.getEnrollmentId(),
                         transactionId,
                         event.getAmount(),
@@ -66,7 +66,7 @@ public class PaymentSagaHandler {
 
                 // Genera el event del error
 
-                PaymentFailedEvent failedEvent = new PaymentFailedEvent(
+                PaymentRejectedEvent failedEvent = new PaymentRejectedEvent(
                         event.getEnrollmentId(),
                         "PAYMENT_DECLINED",
                         "El pago fue rechazado por el proveedor, saldo insuficiente.",

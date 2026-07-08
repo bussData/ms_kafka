@@ -42,7 +42,7 @@ public class KafkaEventPublisher {
        } else if (event instanceof EnrollmentCreatedEvent) {  // AGREGAR
             return KafkaConfig.ENROLLMENT_EVENTS_TOPIC;
        }else if (event instanceof EnrollmentUpdatedEvent) {  // AGREGAR
-               return KafkaConfig.ENROLLMENT_EVENTS_TOPIC;
+               return KafkaConfig.ENROLLMENT_UPDATE_TOPIC;
        }else{
             throw new IllegalArgumentException("Unknown event type: " + event.getEventType());
         }

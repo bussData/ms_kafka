@@ -35,3 +35,21 @@ CREATE TABLE enrollments (
                              status VARCHAR(40) DEFAULT 'PENDING_PAYMENT',
                              created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+CREATE TABLE payments (
+    id BIGSERIAL PRIMARY KEY,
+    enrollment_id BIGINT NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    status VARCHAR(30) DEFAULT 'APPROVED',
+    paid_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE notifications (
+    id BIGSERIAL PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    message TEXT NOT NULL,
+    sent BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

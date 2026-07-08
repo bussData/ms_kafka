@@ -1,23 +1,21 @@
-package com.tecsup.app.micro.notifications.domain;
+package com.tecsup.app.micro.payment.domain.event;
 
-import com.tecsup.app.micro.notifications.shared.domain.event.DomainEvent;
+import com.tecsup.app.micro.payment.shared.domain.event.DomainEvent;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EnrollmentRequestedEvent extends DomainEvent {
+public class PaymentApprovedEvent extends DomainEvent {
 
     private String enrollmentId;
-    private String studentId;
-    private String studentName;
-    private String courseId;
+    private String transactionId;
     private BigDecimal amount;
     private LocalDateTime timestamp;
 
