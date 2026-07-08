@@ -1,5 +1,7 @@
 package com.tecsup.app.micro.enrollment.application.command;
 
+import com.tecsup.app.micro.enrollment.application.query.EnrollmentQueryRepository;
+import com.tecsup.app.micro.enrollment.domain.event.EnrollmentCreatedEvent;
 import com.tecsup.app.micro.enrollment.domain.event.LessonCompletedEvent;
 import com.tecsup.app.micro.enrollment.domain.event.StudentEnrolledEvent;
 import com.tecsup.app.micro.enrollment.domain.model.Enrollment;
@@ -8,6 +10,8 @@ import com.tecsup.app.micro.enrollment.infrastructure.client.CursoClient;
 import com.tecsup.app.micro.enrollment.infrastructure.client.UserClient;
 import com.tecsup.app.micro.enrollment.infrastructure.client.dto.CursoDTO;
 import com.tecsup.app.micro.enrollment.infrastructure.client.dto.UserDTO;
+import com.tecsup.app.micro.enrollment.infrastructure.dto.EnrollmentRequest;
+import com.tecsup.app.micro.enrollment.shared.infrastructure.event.KafkaEventPublisher;
 import com.tecsup.app.micro.enrollment.shared.infrastructure.eventsourcing.MemoryEventStore;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +36,7 @@ public class EnrollmentCommandHandler {
     private final UserClient userClient;
     private final CursoClient cursoClient;
     private final EnrollmentRepository enrollmentRepository;
+    private final KafkaEventPublisher eventPublisher;
 
     /*public EnrollmentCommandHandler(MemoryEventStore eventStore, MemoryEventStore eventStore1, UserClient userClient) {
         this.eventStore = eventStore1;
@@ -67,7 +72,7 @@ public class EnrollmentCommandHandler {
 
 
         // Crear el evento de inscripción
-        StudentEnrolledEvent event
+        /*StudentEnrolledEvent event
                 = StudentEnrolledEvent.builder()
                 .enrollmentId(saved.getId())
                 .studentId(command.getStudentId())
@@ -76,7 +81,14 @@ public class EnrollmentCommandHandler {
                 .build();
 
         //
-        this.eventStore.save(saved.getId(), event);
+        this.eventStore.save(saved.getId(), event);*/
+
+
+        //Crear el evento kafka
+        EnrollmentCreatedEvent event =
+                new EnrollmentCreatedEvent(saved.getId(),saved.getUserId().toString(),
+                        saved.getCourseId().toString(),saved.getStatus() );
+        this.eventPublisher.publish(event);
 
         return saved;
 
@@ -123,4 +135,18 @@ public class EnrollmentCommandHandler {
         return enrollment;
     }
 
+    public Enrollment updateEnrollmentStatus(String id, String status) {
+
+        Enrollment enroll = enrollmentRepository.getEnrollmentById(String.valueOf(id));
+        enroll.setStatus(status);
+        enrollmentRepository.save(enroll);
+
+        //Crear el evento kafka
+        EnrollmentCreatedEvent event =
+                new EnrollmentCreatedEvent(enroll.getId(),enroll.getUserId().toString(),
+                        enroll.getCourseId().toString(),enroll.getStatus() );
+        this.eventPublisher.publish(event);
+
+        return enroll;
+    }
 }

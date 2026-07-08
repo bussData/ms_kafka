@@ -10,7 +10,6 @@ import com.tecsup.app.micro.enrollment.domain.event.EnrollmentCreatedEvent;
 import com.tecsup.app.micro.enrollment.domain.model.Enrollment;
 import com.tecsup.app.micro.enrollment.infrastructure.dto.EnrollmentRequest;
 import com.tecsup.app.micro.enrollment.infrastructure.dto.EnrollmentResponse;
-import com.tecsup.app.micro.enrollment.shared.infrastructure.event.KafkaEventPublisher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -28,7 +27,6 @@ public class EnrollmentController {
     private final EnrollmentCommandHandler enrollmentCommandHandler;
 
     private final EnrollmentQueryRepository enrollmentQueryRepository;
-    private final KafkaEventPublisher eventPublisher;
 
     // ========================================
     // SAGA
@@ -72,12 +70,6 @@ public class EnrollmentController {
                 .build();
 
         Enrollment enrolled = enrollmentCommandHandler.enrollStudent(command);
-
-        //Crear el evento kafka
-        EnrollmentCreatedEvent event =
-                new EnrollmentCreatedEvent(enrolled.getId(),enrolled.getUserId().toString(),
-                        enrolled.getCourseId().toString(),enrolled.getStatus() );
-        this.eventPublisher.publish(event);
 
         return ResponseEntity.ok(EnrollmentResponse
                 .builder()
