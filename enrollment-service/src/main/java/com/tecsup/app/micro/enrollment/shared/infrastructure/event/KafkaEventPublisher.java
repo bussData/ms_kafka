@@ -1,5 +1,6 @@
 package com.tecsup.app.micro.enrollment.shared.infrastructure.event;
 
+import com.tecsup.app.micro.enrollment.domain.event.EnrollmentCreatedEvent;
 import com.tecsup.app.micro.enrollment.domain.event.EnrollmentRequestedEvent;
 import com.tecsup.app.micro.enrollment.shared.domain.event.DomainEvent;
 import com.tecsup.app.micro.enrollment.shared.infrastructure.config.KafkaConfig;
@@ -37,7 +38,9 @@ public class KafkaEventPublisher {
 
        if (event instanceof EnrollmentRequestedEvent) {  // AGREGAR
             return KafkaConfig.ENROLLMENT_REQUEST_TOPIC;  // AGREGAR
-        } else {
+       } else if (event instanceof EnrollmentCreatedEvent) {  // AGREGAR
+            return KafkaConfig.ENROLLMENT_EVENTS_TOPIC;
+       }else{
             throw new IllegalArgumentException("Unknown event type: " + event.getEventType());
         }
     }

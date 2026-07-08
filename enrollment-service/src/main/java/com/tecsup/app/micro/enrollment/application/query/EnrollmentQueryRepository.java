@@ -1,5 +1,7 @@
 package com.tecsup.app.micro.enrollment.application.query;
 
+import com.tecsup.app.micro.enrollment.domain.model.Enrollment;
+import com.tecsup.app.micro.enrollment.domain.repository.EnrollmentRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -7,7 +9,14 @@ import java.util.*;
 @Component
 public class EnrollmentQueryRepository {
 
+
+    private final EnrollmentRepository enrollmentRepository;
+
     private final Map<String, EnrollmentReadModel> readModels = new HashMap<>();
+
+    public EnrollmentQueryRepository(EnrollmentRepository enrollmentRepository) {
+        this.enrollmentRepository = enrollmentRepository;
+    }
 
     // Update
 
@@ -42,8 +51,18 @@ public class EnrollmentQueryRepository {
         return  new ArrayList<>(this.readModels.values());
     }
 
+    public List<EnrollmentReadModel> findByUserId(Long userId) {
+
+        return this.readModels.values()
+                .stream()
+                .filter(e -> userId.equals(e.getStudentId()))
+                .toList();
+    }
 
 
+    public List<Enrollment> getByUserId(String userId) {
 
+        return enrollmentRepository.getEnrollmentByUserId(userId);
+    }
 
 }

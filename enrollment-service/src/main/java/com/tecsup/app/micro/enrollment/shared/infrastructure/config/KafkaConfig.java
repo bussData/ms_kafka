@@ -20,6 +20,7 @@ public class KafkaConfig {
 
     // SAGA
     public static final String ENROLLMENT_REQUEST_TOPIC = "enrollment.requested";
+    public static final String ENROLLMENT_EVENTS_TOPIC = "enrollment.events";
 
     public static final String PAYMENT_PROCESSED_TOPIC = "payment.processed";   // AGREGAR
 

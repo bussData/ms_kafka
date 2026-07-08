@@ -160,6 +160,53 @@
       "response": []
     },
     {
+      "name": "7. Consultar matricula por Id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/enrollments/6",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "enrollments",
+            "6"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "8. Consultar matriculas por usuario",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8082/api/enrollments?userId=2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8082",
+          "path": [
+            "api",
+            "enrollments"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "CHECKPOINT 3---borrador",
       "request": {
         "method": "PUT",

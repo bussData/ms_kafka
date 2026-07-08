@@ -6,14 +6,18 @@ import com.tecsup.app.micro.enrollment.application.command.EnrollmentCommandHand
 import com.tecsup.app.micro.enrollment.application.query.EnrollmentQueryRepository;
 import com.tecsup.app.micro.enrollment.application.query.EnrollmentReadModel;
 import com.tecsup.app.micro.enrollment.application.saga.EnrollmentSagaHandler;
+import com.tecsup.app.micro.enrollment.domain.event.EnrollmentCreatedEvent;
 import com.tecsup.app.micro.enrollment.domain.model.Enrollment;
 import com.tecsup.app.micro.enrollment.infrastructure.dto.EnrollmentRequest;
 import com.tecsup.app.micro.enrollment.infrastructure.dto.EnrollmentResponse;
+import com.tecsup.app.micro.enrollment.shared.infrastructure.event.KafkaEventPublisher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -24,8 +28,7 @@ public class EnrollmentController {
     private final EnrollmentCommandHandler enrollmentCommandHandler;
 
     private final EnrollmentQueryRepository enrollmentQueryRepository;
-
-
+    private final KafkaEventPublisher eventPublisher;
 
     // ========================================
     // SAGA
@@ -68,12 +71,18 @@ public class EnrollmentController {
                 .courseId(request.getCourseId())
                 .build();
 
-        String enrollmentId = enrollmentCommandHandler.enrollStudent(command);
+        Enrollment enrolled = enrollmentCommandHandler.enrollStudent(command);
 
-        // return ResponseEntity.ok(new EnrollmentResponse(enrollmentId));
+        //Crear el evento kafka
+        EnrollmentCreatedEvent event =
+                new EnrollmentCreatedEvent(enrolled.getId(),enrolled.getUserId().toString(),
+                        enrolled.getCourseId().toString(),enrolled.getStatus() );
+        this.eventPublisher.publish(event);
+
         return ResponseEntity.ok(EnrollmentResponse
                 .builder()
-                .enrollmentId(enrollmentId)
+                .enrollmentId(enrolled.getId())
+                .status(enrolled.getStatus())
                 .build());
 
     }
@@ -120,4 +129,12 @@ public class EnrollmentController {
 
 
 
+    @GetMapping
+    public ResponseEntity<List<Enrollment>> getEnrollmentsByUser(
+            @RequestParam String userId) {
+
+        return ResponseEntity.ok(
+                this.enrollmentQueryRepository.getByUserId(userId)
+        );
+    }
 }
