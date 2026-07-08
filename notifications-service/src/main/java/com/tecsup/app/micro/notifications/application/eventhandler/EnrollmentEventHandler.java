@@ -1,7 +1,8 @@
 package com.tecsup.app.micro.notifications.application.eventhandler;
 
-import com.tecsup.app.micro.notifications.domain.EnrollmentCreatedEvent;
-import com.tecsup.app.micro.notifications.shared.domain.event.DomainEvent;
+
+import com.tecsup.app.micro.events.DomainEvent;
+import com.tecsup.app.micro.events.EnrollmentCreatedEvent;
 import com.tecsup.app.micro.notifications.shared.infrastructure.config.KafkaConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;

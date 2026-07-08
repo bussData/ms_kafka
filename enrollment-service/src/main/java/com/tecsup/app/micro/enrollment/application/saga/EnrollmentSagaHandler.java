@@ -1,9 +1,9 @@
 package com.tecsup.app.micro.enrollment.application.saga;
 
-import com.tecsup.app.micro.enrollment.domain.event.EnrollmentRequestedEvent;
-import com.tecsup.app.micro.enrollment.domain.event.PaymentProcessedEvent;
 import com.tecsup.app.micro.enrollment.shared.infrastructure.config.KafkaConfig;
 import com.tecsup.app.micro.enrollment.shared.infrastructure.event.KafkaEventPublisher;
+import com.tecsup.app.micro.events.EnrollmentRequestedEvent;
+import com.tecsup.app.micro.events.PaymentProcessedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;

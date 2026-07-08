@@ -1,7 +1,7 @@
 package com.tecsup.app.micro.enrollment.application.command;
 
 import com.tecsup.app.micro.enrollment.application.query.EnrollmentQueryRepository;
-import com.tecsup.app.micro.enrollment.domain.event.EnrollmentCreatedEvent;
+
 import com.tecsup.app.micro.enrollment.domain.event.LessonCompletedEvent;
 import com.tecsup.app.micro.enrollment.domain.event.StudentEnrolledEvent;
 import com.tecsup.app.micro.enrollment.domain.model.Enrollment;
@@ -13,6 +13,7 @@ import com.tecsup.app.micro.enrollment.infrastructure.client.dto.UserDTO;
 import com.tecsup.app.micro.enrollment.infrastructure.dto.EnrollmentRequest;
 import com.tecsup.app.micro.enrollment.shared.infrastructure.event.KafkaEventPublisher;
 import com.tecsup.app.micro.enrollment.shared.infrastructure.eventsourcing.MemoryEventStore;
+import com.tecsup.app.micro.events.EnrollmentCreatedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

@@ -1,10 +1,11 @@
 package com.tecsup.app.micro.enrollment.shared.infrastructure.event;
 
-import com.tecsup.app.micro.enrollment.domain.event.EnrollmentCreatedEvent;
-import com.tecsup.app.micro.enrollment.domain.event.EnrollmentRequestedEvent;
-import com.tecsup.app.micro.enrollment.domain.event.EnrollmentUpdatedEvent;
-import com.tecsup.app.micro.enrollment.shared.domain.event.DomainEvent;
+
 import com.tecsup.app.micro.enrollment.shared.infrastructure.config.KafkaConfig;
+import com.tecsup.app.micro.events.DomainEvent;
+import com.tecsup.app.micro.events.EnrollmentCreatedEvent;
+import com.tecsup.app.micro.events.EnrollmentRequestedEvent;
+import com.tecsup.app.micro.events.EnrollmentUpdatedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;

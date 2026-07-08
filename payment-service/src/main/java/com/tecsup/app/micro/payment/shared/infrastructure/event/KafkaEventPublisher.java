@@ -1,12 +1,14 @@
 package com.tecsup.app.micro.payment.shared.infrastructure.event;
 
-import com.tecsup.app.micro.payment.domain.event.EnrollmentRequestedEvent;
-import com.tecsup.app.micro.payment.shared.domain.event.DomainEvent;
+import com.tecsup.app.micro.events.DomainEvent;
+import com.tecsup.app.micro.events.EnrollmentRequestedEvent;
 import com.tecsup.app.micro.payment.shared.infrastructure.config.KafkaConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
+
+
 
 
 @Slf4j

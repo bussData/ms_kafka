@@ -1,8 +1,7 @@
 package com.tecsup.app.micro.payment.shared.infrastructure.eventsourcing;
 
 
-
-import com.tecsup.app.micro.payment.shared.domain.event.DomainEvent;
+import com.tecsup.app.micro.events.DomainEvent;
 
 import java.util.List;
 

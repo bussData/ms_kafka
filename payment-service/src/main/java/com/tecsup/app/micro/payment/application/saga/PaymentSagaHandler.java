@@ -1,8 +1,8 @@
 package com.tecsup.app.micro.payment.application.saga;
 
-import com.tecsup.app.micro.payment.domain.event.EnrollmentRequestedEvent;
-import com.tecsup.app.micro.payment.domain.event.PaymentRejectedEvent;
-import com.tecsup.app.micro.payment.domain.event.PaymentApprovedEvent;
+import com.tecsup.app.micro.events.EnrollmentRequestedEvent;
+import com.tecsup.app.micro.events.PaymentApprovedEvent;
+import com.tecsup.app.micro.events.PaymentRejectedEvent;
 import com.tecsup.app.micro.payment.shared.infrastructure.config.KafkaConfig;
 import com.tecsup.app.micro.payment.shared.infrastructure.event.KafkaEventPublisher;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,7 @@
-package com.tecsup.app.micro.payment.domain.event;
+package com.tecsup.app.micro.enrollment.domain.event;
 
-import com.tecsup.app.micro.events.DomainEvent;
+
+import com.tecsup.app.micro.enrollment.shared.domain.event.DomainEvent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

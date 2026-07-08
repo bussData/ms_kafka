@@ -1,6 +1,7 @@
 package com.tecsup.app.micro.payment.shared.infrastructure.dlq;
 
-import com.tecsup.app.micro.payment.shared.domain.event.DomainEvent;
+
+import com.tecsup.app.micro.events.DomainEvent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

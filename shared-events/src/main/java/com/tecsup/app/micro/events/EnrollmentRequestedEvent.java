@@ -1,25 +1,28 @@
-package com.tecsup.app.micro.payment.domain.event;
+package com.tecsup.app.micro.events;
 
-import com.tecsup.app.micro.events.DomainEvent;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentRejectedEvent extends DomainEvent {
+public class EnrollmentRequestedEvent extends DomainEvent {
 
     private String enrollmentId;
-    private String reason;
-    private String errorCode;
+    private String studentId;
+    private String studentName;
+    private String courseId;
+    private BigDecimal amount;
     private LocalDateTime timestamp;
 
     @Override
     public String getKey() {
         return enrollmentId;
     }
+
 }

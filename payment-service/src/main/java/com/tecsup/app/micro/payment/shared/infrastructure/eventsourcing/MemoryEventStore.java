@@ -1,7 +1,7 @@
 package com.tecsup.app.micro.payment.shared.infrastructure.eventsourcing;
 
 
-import com.tecsup.app.micro.payment.shared.domain.event.DomainEvent;
+import com.tecsup.app.micro.events.DomainEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
