@@ -9,4 +9,6 @@ public interface EnrollmentRepository {
     Enrollment save(Enrollment enrollment);
 
     List<Enrollment> getEnrollmentByUserId(String studentId);
+
+    Enrollment getEnrollmentById(String enrollmentId);
 }

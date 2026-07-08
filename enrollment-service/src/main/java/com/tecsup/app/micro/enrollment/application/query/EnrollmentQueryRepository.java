@@ -65,4 +65,10 @@ public class EnrollmentQueryRepository {
         return enrollmentRepository.getEnrollmentByUserId(userId);
     }
 
+    public void updateStatus(Long id, String status) {
+
+        Enrollment enroll = enrollmentRepository.getEnrollmentById(String.valueOf(id));
+        enroll.setStatus(status);
+        enrollmentRepository.save(enroll);
+    }
 }

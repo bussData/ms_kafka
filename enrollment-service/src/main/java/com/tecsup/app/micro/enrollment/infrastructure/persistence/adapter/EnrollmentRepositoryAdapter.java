@@ -38,4 +38,12 @@ public class EnrollmentRepositoryAdapter implements EnrollmentRepository {
                 .map(mapper::toDomain)
                 .toList();
     }
+
+    @Override
+    public Enrollment getEnrollmentById(String enrollmentId) {
+
+        EnrollmentJpaEntity entity =
+                jpaRepository.getReferenceById(Long.valueOf(enrollmentId));
+        return mapper.toDomain(entity);
+    }
 }
