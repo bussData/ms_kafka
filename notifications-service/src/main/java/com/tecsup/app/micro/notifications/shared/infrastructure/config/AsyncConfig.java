@@ -1,4 +1,4 @@
-package com.tecsup.app.micro.enrollment.shared.infrastructure.config;
+package com.tecsup.app.micro.notifications.shared.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

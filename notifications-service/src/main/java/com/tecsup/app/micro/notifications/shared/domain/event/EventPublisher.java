@@ -1,5 +1,6 @@
-package com.tecsup.app.micro.enrollment.shared.domain.event;
+package com.tecsup.app.micro.notifications.shared.domain.event;
 
+import com.tecsup.app.micro.notifications.shared.domain.event.DomainEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;

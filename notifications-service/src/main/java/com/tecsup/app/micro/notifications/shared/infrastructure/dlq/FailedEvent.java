@@ -1,7 +1,6 @@
-package com.tecsup.app.micro.enrollment.shared.infrastructure.dlq;
+package com.tecsup.app.micro.notifications.shared.infrastructure.dlq;
 
-
-import com.tecsup.app.micro.enrollment.shared.domain.event.DomainEvent;
+import com.tecsup.app.micro.notifications.shared.domain.event.DomainEvent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
