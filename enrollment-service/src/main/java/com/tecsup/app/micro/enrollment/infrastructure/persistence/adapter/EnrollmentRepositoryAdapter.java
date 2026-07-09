@@ -7,10 +7,12 @@ import com.tecsup.app.micro.enrollment.infrastructure.client.dto.UserDTO;
 import com.tecsup.app.micro.enrollment.infrastructure.persistence.entity.EnrollmentJpaEntity;
 import com.tecsup.app.micro.enrollment.infrastructure.persistence.mapper.EnrollmentJpaMapper;
 import com.tecsup.app.micro.enrollment.infrastructure.persistence.repository.JpaEnrollmentRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -42,8 +44,12 @@ public class EnrollmentRepositoryAdapter implements EnrollmentRepository {
     @Override
     public Enrollment getEnrollmentById(String enrollmentId) {
 
-        EnrollmentJpaEntity entity =
-                jpaRepository.getReferenceById(Long.valueOf(enrollmentId));
+        EnrollmentJpaEntity entity = jpaRepository.findById(Long.valueOf(enrollmentId))
+                .orElseThrow(() ->
+                        new EntityNotFoundException(
+                                "Enrollment no encontrado: " + enrollmentId));
+
+
         return mapper.toDomain(entity);
     }
 }

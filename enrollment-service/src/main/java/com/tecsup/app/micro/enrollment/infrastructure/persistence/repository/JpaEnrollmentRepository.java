@@ -11,4 +11,5 @@ import java.util.List;
 public interface JpaEnrollmentRepository extends JpaRepository<EnrollmentJpaEntity, Long> {
 
     List<EnrollmentJpaEntity> findByUserId(Long userId);
+    EnrollmentJpaEntity getReferenceById(Long id);
 }
