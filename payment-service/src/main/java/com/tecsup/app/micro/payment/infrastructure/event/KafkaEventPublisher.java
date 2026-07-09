@@ -1,8 +1,7 @@
-package com.tecsup.app.micro.payment.shared.infrastructure.event;
+package com.tecsup.app.micro.payment.infrastructure.event;
 
-import com.tecsup.app.micro.events.DomainEvent;
-import com.tecsup.app.micro.events.EnrollmentRequestedEvent;
-import com.tecsup.app.micro.payment.shared.infrastructure.config.KafkaConfig;
+import com.tecsup.app.micro.events.*;
+import com.tecsup.app.micro.payment.infrastructure.config.KafkaConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -37,11 +36,17 @@ public class KafkaEventPublisher {
 
     private String getTopicFromEvent(DomainEvent event) {
 
-       if (event instanceof EnrollmentRequestedEvent) {  // AGREGAR
+        if (event instanceof EnrollmentRequestedEvent) {  // AGREGAR
             return KafkaConfig.ENROLLMENT_REQUEST_TOPIC;  // AGREGAR
-        } else {
+        } else if (event instanceof PaymentApprovedEvent) {  // AGREGAR
+            return KafkaConfig.PAYMENT_PROCESSED_TOPIC;
+        }else if (event instanceof PaymentRejectedEvent) {  // AGREGAR
+            return KafkaConfig.PAYMENT_FAILED_TOPIC;
+        }else{
             throw new IllegalArgumentException("Unknown event type: " + event.getEventType());
         }
+
+
     }
 
 

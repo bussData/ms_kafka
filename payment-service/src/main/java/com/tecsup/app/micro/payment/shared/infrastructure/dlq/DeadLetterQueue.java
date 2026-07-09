@@ -1,7 +1,7 @@
 package com.tecsup.app.micro.payment.shared.infrastructure.dlq;
 
 import com.tecsup.app.micro.events.DomainEvent;
-import com.tecsup.app.micro.payment.shared.infrastructure.config.KafkaConfig;
+import com.tecsup.app.micro.payment.infrastructure.config.KafkaConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;

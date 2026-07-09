@@ -3,8 +3,8 @@ package com.tecsup.app.micro.payment.application.saga;
 import com.tecsup.app.micro.events.EnrollmentRequestedEvent;
 import com.tecsup.app.micro.events.PaymentApprovedEvent;
 import com.tecsup.app.micro.events.PaymentRejectedEvent;
-import com.tecsup.app.micro.payment.shared.infrastructure.config.KafkaConfig;
-import com.tecsup.app.micro.payment.shared.infrastructure.event.KafkaEventPublisher;
+import com.tecsup.app.micro.payment.infrastructure.config.KafkaConfig;
+import com.tecsup.app.micro.payment.infrastructure.event.KafkaEventPublisher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -50,7 +50,7 @@ public class PaymentSagaHandler {
 
                 // Generar el evento
                 PaymentApprovedEvent processedEvent = new PaymentApprovedEvent(
-                        event.getEnrollmentId(),
+                        Long.valueOf(event.getEnrollmentId()),
                         transactionId,
                         event.getAmount(),
                         LocalDateTime.now());
@@ -67,7 +67,7 @@ public class PaymentSagaHandler {
                 // Genera el event del error
 
                 PaymentRejectedEvent failedEvent = new PaymentRejectedEvent(
-                        event.getEnrollmentId(),
+                        Long.valueOf(event.getEnrollmentId()),
                         "PAYMENT_DECLINED",
                         "El pago fue rechazado por el proveedor, saldo insuficiente.",
                         LocalDateTime.now()

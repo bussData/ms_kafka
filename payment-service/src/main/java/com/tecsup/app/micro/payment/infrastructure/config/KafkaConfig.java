@@ -1,4 +1,4 @@
-package com.tecsup.app.micro.payment.shared.infrastructure.config;
+package com.tecsup.app.micro.payment.infrastructure.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;
@@ -22,8 +22,9 @@ public class KafkaConfig {
     public static final String ENROLLMENT_REQUEST_TOPIC = "enrollment.requested";
 
     public static final String PAYMENT_PROCESSED_TOPIC = "payment.processed";   // AGREGAR
-
     public static final String PAYMENT_FAILED_TOPIC = "payment.failed";  // AGREGAR
+
+    public static final String ENROLLMENT_UPDATE_TOPIC = "enrollment.update";
 
 
     // Set QUEUES/PARTITIONS
