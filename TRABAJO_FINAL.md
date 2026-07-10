@@ -88,7 +88,7 @@ Incluye:
 | course-service | Gestión de cursos | coursedb | 5436      |
 | enrollment-service | Gestión de matrículas | enrollmentdb | 5438      |
 | payment-service | Gestión de pagos | paymentdb | 5440      |
-| notification-service | Notificaciones por eventos | notificationdb |           |
+| notification-service | Notificaciones por eventos | notificationdb | 5442      |
 | user-service | Gestión de usuarios | userdb | 5434      |
 
 ---

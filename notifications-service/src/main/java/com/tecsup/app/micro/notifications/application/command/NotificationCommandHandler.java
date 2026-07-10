@@ -21,7 +21,8 @@ public class NotificationCommandHandler {
         Notification notification =
                 createNotificationUseCase.registrarNotification(
                         command.getUserId(),
-                        command.getMessage()
+                        command.getMessage(),
+                        command.getSent()
                 );
 
         log.info("[NOTIFICATION] Notificación registrada correctamente. Id={}",

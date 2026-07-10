@@ -24,7 +24,7 @@ public class NotificationController {
     public Notification createNotification(
             @RequestBody CreateNotificationCommand command) {
 
-        log.info("[REST] Creando notificación para userId={}", command.getUserId());
+       // log.info("[REST] Creando notificación para userId={}", command.getUserId());
 
         return notificationCommandHandler.createNotification(command);
     }

@@ -9,5 +9,9 @@ public class CreateNotificationCommand {
 
     private Long userId;
     private String message;
+    private boolean sent;
 
+    public boolean getSent() {
+        return sent;
+    }
 }

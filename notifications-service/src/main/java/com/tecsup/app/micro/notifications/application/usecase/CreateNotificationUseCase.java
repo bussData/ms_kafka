@@ -18,12 +18,12 @@ public class CreateNotificationUseCase {
     /**
      * Registrar una notificación.
      */
-    public Notification registrarNotification(Long userId, String message) {
+    public Notification registrarNotification(Long userId, String message, boolean sent) {
 
         Notification notification = Notification.builder()
                 .userId(userId)
                 .message(message)
-                .sent(false)
+                .sent(sent)
                 .createdAt(LocalDateTime.now())
                 .build();
 

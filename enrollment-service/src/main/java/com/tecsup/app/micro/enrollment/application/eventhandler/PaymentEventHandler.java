@@ -45,7 +45,7 @@ public class PaymentEventHandler {
     {
         log.info("Pago aprobado {}", event);
         enrollmentComandHandler.updateEnrollmentStatus(String.valueOf(event.getEnrollmentId()),"CONFIRMED");
-        log.info("[Kafka] MATRICULA realizada: {}", event);
+        log.info("[Kafka] PAGO de matricula confirmado: {}", event);
 
     }
 
@@ -54,7 +54,7 @@ public class PaymentEventHandler {
     {
 
         enrollmentComandHandler.updateEnrollmentStatus(String.valueOf(event.getEnrollmentId()),"CANCELLED");
-        log.info("[Kafka] MATRICULA realizada: {}", event);
+        log.info("[Kafka] PAGO de matricula rechazado: {}", event);
 
     }
 }
