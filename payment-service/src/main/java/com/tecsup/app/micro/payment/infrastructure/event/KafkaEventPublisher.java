@@ -36,12 +36,10 @@ public class KafkaEventPublisher {
 
     private String getTopicFromEvent(DomainEvent event) {
 
-        if (event instanceof EnrollmentRequestedEvent) {  // AGREGAR
-            return KafkaConfig.ENROLLMENT_REQUEST_TOPIC;  // AGREGAR
-        } else if (event instanceof PaymentApprovedEvent) {  // AGREGAR
+         if (event instanceof PaymentApprovedEvent) {  // AGREGAR
             return KafkaConfig.PAYMENT_PROCESSED_TOPIC;
         }else if (event instanceof PaymentRejectedEvent) {  // AGREGAR
-            return KafkaConfig.PAYMENT_FAILED_TOPIC;
+            return KafkaConfig.PAYMENT_PROCESSED_TOPIC;
         }else{
             throw new IllegalArgumentException("Unknown event type: " + event.getEventType());
         }

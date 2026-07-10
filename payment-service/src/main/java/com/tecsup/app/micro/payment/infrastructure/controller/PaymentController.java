@@ -3,7 +3,6 @@ package com.tecsup.app.micro.payment.infrastructure.controller;
 import com.tecsup.app.micro.events.EnrollmentRequestedEvent;
 import com.tecsup.app.micro.payment.application.command.CreatePaymentCommand;
 import com.tecsup.app.micro.payment.application.command.PaymentCommandHandler;
-import com.tecsup.app.micro.payment.application.saga.PaymentSagaHandler;
 import com.tecsup.app.micro.payment.domain.model.Payment;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 public class PaymentController {
 
     private final PaymentCommandHandler paymentCommandHandler;
-    private final PaymentSagaHandler sagaHandler;
 
 
     @PostMapping

@@ -14,6 +14,7 @@ import com.tecsup.app.micro.enrollment.infrastructure.dto.EnrollmentRequest;
 import com.tecsup.app.micro.enrollment.shared.infrastructure.event.KafkaEventPublisher;
 import com.tecsup.app.micro.enrollment.shared.infrastructure.eventsourcing.MemoryEventStore;
 import com.tecsup.app.micro.events.EnrollmentCreatedEvent;
+import com.tecsup.app.micro.events.EnrollmentUpdatedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -143,8 +144,8 @@ public class EnrollmentCommandHandler {
         enrollmentRepository.save(enroll);
 
         //Crear el evento kafka
-        EnrollmentCreatedEvent event =
-                new EnrollmentCreatedEvent(enroll.getId(),enroll.getUserId().toString(),
+        EnrollmentUpdatedEvent event =
+                new EnrollmentUpdatedEvent(enroll.getId(),enroll.getUserId().toString(),
                         enroll.getCourseId().toString(),enroll.getStatus() );
         this.eventPublisher.publish(event);
 

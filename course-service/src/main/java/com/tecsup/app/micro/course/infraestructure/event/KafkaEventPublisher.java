@@ -42,13 +42,7 @@ public class KafkaEventPublisher {
         if ( event instanceof CourseCreatedEvent ||
                 event instanceof CoursePublishedEvent) {
             return KafkaConfig.COURSE_EVENTS_TOPIC;
-     /*   } else if (event instanceof EnrollmentRequestedEvent) {  // AGREGAR
-            return KafkaConfig.ENROLLMENT_REQUEST_TOPIC;         // AGREGAR
-        } else if (event instanceof PaymentProcessedEvent) {  // AGREGAR
-            return KafkaConfig.PAYMENT_PROCESSED_TOPIC;       // AGREGAR
-        } else if (event instanceof PaymentFailedEvent) {   // AGREGAR
-            return KafkaConfig.PAYMENT_FAILED_TOPIC;        // AGREGAR
-      */  } else {
+        } else {
             throw new IllegalArgumentException("Unknown event type: " + event.getEventType());
         }
     }

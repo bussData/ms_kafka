@@ -15,16 +15,16 @@ public class KafkaConfig {
 
 
     // DLQ
-    public static final String DLQ_COURSE_EVENTS_TOPIC = "dlq.course.events";  // ✅ DLQ Topic
+   // public static final String DLQ_COURSE_EVENTS_TOPIC = "dlq.course.events";  // ✅ DLQ Topic
 
 
     // SAGA
-    public static final String ENROLLMENT_REQUEST_TOPIC = "enrollment.requested";
+   // public static final String ENROLLMENT_REQUEST_TOPIC = "enrollment.requested";
 
-    public static final String PAYMENT_PROCESSED_TOPIC = "payment.processed";   // AGREGAR
-    public static final String PAYMENT_FAILED_TOPIC = "payment.failed";  // AGREGAR
+    public static final String PAYMENT_PROCESSED_TOPIC = "payment.events";   // AGREGAR
+    //public static final String PAYMENT_FAILED_TOPIC = "payment.failed";  // AGREGAR
 
-    public static final String ENROLLMENT_UPDATE_TOPIC = "enrollment.update";
+    public static final String ENROLLMENT_UPDATE_TOPIC = "enrollment.events";
 
 
     // Set QUEUES/PARTITIONS
@@ -42,24 +42,6 @@ public class KafkaConfig {
         );
     }
 
-    // DLQ
-    @Bean
-    public NewTopic dlqCourseEventsTopic() {
-        return TopicBuilder.name(DLQ_COURSE_EVENTS_TOPIC)
-                .partitions(1)
-                .replicas(1)
-                .build();
-    }
-
-    // SAGA
-    @Bean
-    public NewTopic enrollmentRequestedTopic() {
-        return TopicBuilder
-                .name(ENROLLMENT_REQUEST_TOPIC)
-                .partitions(3)
-                .replicas(1)
-                .build();
-    }
 
     @Bean
     public NewTopic paymentProcessedTopic() {
@@ -75,7 +57,7 @@ public class KafkaConfig {
     @Bean
     public NewTopic paymentFailedTopic() {
         return TopicBuilder
-                .name(PAYMENT_FAILED_TOPIC)
+                .name(PAYMENT_PROCESSED_TOPIC)
                 .partitions(3)
                 .replicas(1)
                 .build();

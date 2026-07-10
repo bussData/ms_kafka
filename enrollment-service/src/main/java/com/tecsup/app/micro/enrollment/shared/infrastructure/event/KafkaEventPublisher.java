@@ -38,9 +38,7 @@ public class KafkaEventPublisher {
 
     private String getTopicFromEvent(DomainEvent event) {
 
-       if (event instanceof EnrollmentRequestedEvent) {  // AGREGAR
-            return KafkaConfig.ENROLLMENT_REQUEST_TOPIC;  // AGREGAR
-       } else if (event instanceof EnrollmentCreatedEvent) {  // AGREGAR
+       if (event instanceof EnrollmentCreatedEvent) {  // AGREGAR
             return KafkaConfig.ENROLLMENT_EVENTS_TOPIC;
        }else if (event instanceof EnrollmentUpdatedEvent) {  // AGREGAR
                return KafkaConfig.ENROLLMENT_UPDATE_TOPIC;

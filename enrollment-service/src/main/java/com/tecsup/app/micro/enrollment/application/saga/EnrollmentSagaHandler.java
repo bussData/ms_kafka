@@ -49,10 +49,10 @@ public class EnrollmentSagaHandler {
     /**
      * PASO 2: Reaccionar a pago exitoso
      */
-    @KafkaListener(
+    /*@KafkaListener(
             topics = KafkaConfig.PAYMENT_PROCESSED_TOPIC,
             groupId = "enrollment-saga-group"
-    )
+    )*/
     @Transactional
     public void handlePaymentProcessed(PaymentProcessedEvent event) {
 
