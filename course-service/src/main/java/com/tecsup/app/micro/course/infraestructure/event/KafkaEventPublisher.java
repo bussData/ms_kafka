@@ -1,17 +1,14 @@
 package com.tecsup.app.micro.course.infraestructure.event;
 
-import com.tecsup.app.micro.course.domain.event.CourseCreatedEvent;
-import com.tecsup.app.micro.course.domain.event.CoursePublishedEvent;
-import com.tecsup.app.micro.course.domain.event.DomainEvent;
 import com.tecsup.app.micro.course.infraestructure.config.KafkaConfig;
+import com.tecsup.app.micro.events.CourseCreatedEvent;
+import com.tecsup.app.micro.events.CoursePublishedEvent;
+import com.tecsup.app.micro.events.DomainEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
-//import pe.edu.tecsup.app.micro.course.domain.event.EnrollmentRequestedEvent;
-//import pe.edu.tecsup.lms.payment.domain.event.PaymentFailedEvent;
-//import pe.edu.tecsup.lms.payment.domain.event.PaymentProcessedEvent;
 
 @Slf4j
 @Component

@@ -1,7 +1,9 @@
 package com.tecsup.app.micro.enrollment.shared.infrastructure.eventsourcing;
 
 
-import com.tecsup.app.micro.enrollment.shared.domain.event.DomainEvent;
+
+
+import com.tecsup.app.micro.events.DomainEvent;
 
 import java.util.List;
 

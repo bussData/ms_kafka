@@ -21,7 +21,7 @@
           }
         },
         "url": {
-          "raw": "http://localhost:8080/api/courses",
+          "raw": "http://localhost:8083/api/courses",
           "protocol": "http",
           "host": [
             "localhost"
@@ -41,7 +41,7 @@
         "method": "PUT",
         "header": [],
         "url": {
-          "raw": "http://localhost:8080/api/courses/1/publish?price=10",
+          "raw": "http://localhost:8083/api/courses/1/publish?price=10",
           "protocol": "http",
           "host": [
             "localhost"

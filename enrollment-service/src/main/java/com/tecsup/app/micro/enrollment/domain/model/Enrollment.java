@@ -2,7 +2,7 @@ package com.tecsup.app.micro.enrollment.domain.model;
 
 import com.tecsup.app.micro.enrollment.domain.event.LessonCompletedEvent;
 import com.tecsup.app.micro.enrollment.domain.event.StudentEnrolledEvent;
-import com.tecsup.app.micro.enrollment.shared.domain.event.DomainEvent;
+import com.tecsup.app.micro.events.DomainEvent;
 import lombok.Getter;
 import lombok.Setter;
 

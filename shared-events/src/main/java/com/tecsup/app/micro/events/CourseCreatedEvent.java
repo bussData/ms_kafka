@@ -1,6 +1,5 @@
-package com.tecsup.app.micro.notifications.domain;
+package com.tecsup.app.micro.events;
 
-import com.tecsup.app.micro.notifications.shared.domain.event.DomainEvent;
 import lombok.Getter;
 import lombok.ToString;
 

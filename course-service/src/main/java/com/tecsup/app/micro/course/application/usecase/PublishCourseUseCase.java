@@ -1,11 +1,10 @@
 package com.tecsup.app.micro.course.application.usecase;
 
-
-import com.tecsup.app.micro.course.domain.event.CoursePublishedEvent;
 import com.tecsup.app.micro.course.domain.exception.CourseNotFoundException;
 import com.tecsup.app.micro.course.domain.model.Course;
 import com.tecsup.app.micro.course.domain.repository.CourseRepository;
 import com.tecsup.app.micro.course.infraestructure.event.KafkaEventPublisher;
+import com.tecsup.app.micro.events.CoursePublishedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

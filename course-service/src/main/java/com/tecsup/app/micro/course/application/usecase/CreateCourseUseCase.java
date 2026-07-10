@@ -1,10 +1,10 @@
 package com.tecsup.app.micro.course.application.usecase;
 
 import com.tecsup.app.micro.course.domain.exception.CourseNotFoundException;
+import com.tecsup.app.micro.events.CourseCreatedEvent;
 import org.springframework.stereotype.Component;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.tecsup.app.micro.course.domain.event.CourseCreatedEvent;
 import com.tecsup.app.micro.course.domain.model.Course;
 import com.tecsup.app.micro.course.domain.repository.CourseRepository;
 import com.tecsup.app.micro.course.domain.event.EventPublisher;
@@ -34,7 +34,8 @@ public class CreateCourseUseCase  {
         CourseCreatedEvent event =
                 new CourseCreatedEvent(
                         saved.getId().toString(),
-                        saved.getTitle());
+                        saved.getTitle(),
+                        "");
 
         // Publicar el evento
         this.eventPublisher.publish(event);

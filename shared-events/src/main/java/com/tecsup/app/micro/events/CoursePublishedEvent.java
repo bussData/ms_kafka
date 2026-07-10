@@ -1,10 +1,10 @@
-package com.tecsup.app.micro.course.domain.event;
+package com.tecsup.app.micro.events;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import com.tecsup.app.micro.course.domain.event.DomainEvent;
+
 
 @AllArgsConstructor
 @Getter
