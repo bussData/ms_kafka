@@ -4,6 +4,7 @@ import com.tecsup.app.micro.events.EnrollmentCreatedEvent;
 import com.tecsup.app.micro.events.EnrollmentRequestedEvent;
 import com.tecsup.app.micro.events.PaymentApprovedEvent;
 import com.tecsup.app.micro.events.PaymentRejectedEvent;
+import com.tecsup.app.micro.payment.application.usecase.CreatePaymentUseCase;
 import com.tecsup.app.micro.payment.domain.model.Payment;
 import com.tecsup.app.micro.payment.domain.model.PaymentStatus;
 import com.tecsup.app.micro.payment.domain.repository.PaymentRepository;
@@ -21,16 +22,18 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class PaymentCommandHandler {
 
-    private final PaymentRepository paymentRepository;
     private final KafkaEventPublisher kafkaEventPublisher;
     private final Random random = new Random();
+    private final CreatePaymentUseCase createPaymentUseCase;
 
     public Payment createPayment(CreatePaymentCommand command)  {
 
-        Payment payment = Payment.create(
+        /*Payment payment = Payment.create(
                 command.getEnrollmentId(),
                 command.getAmount()
-        );
+        );*/
+        Payment payment =
+                createPaymentUseCase.registrarPayment(command.getEnrollmentId(), command.getAmount());
         try {
             Thread.sleep(1000 + random.nextInt(2000)); // 1-3 segundos
 

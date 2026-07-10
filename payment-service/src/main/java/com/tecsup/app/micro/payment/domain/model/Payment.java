@@ -33,7 +33,7 @@ public class Payment {
     public static Payment create(Long enrollmentId, BigDecimal amount) {
 
         return Payment.builder()
-                .id(UUID.randomUUID().toString())
+                //.id(UUID.randomUUID().toString())
                 .enrollmentId(enrollmentId)
                 .amount(amount)
                 .status(PaymentStatus.PENDING)

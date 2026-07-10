@@ -17,7 +17,7 @@ public class PaymentRepositoryAdapter implements PaymentRepository {
 
         PaymentEntity entity = PaymentEntity.builder()
                 .id(payment.getId() == null ? null : Long.valueOf(payment.getId()))
-                .enrollmentId(Long.valueOf(payment.getEnrollmentId()))
+                .enrollmentId(payment.getEnrollmentId())
                 .amount(payment.getAmount())
                 .status(payment.getStatus())
                 .paidAt(payment.getCreatedAt())

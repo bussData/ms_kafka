@@ -4,35 +4,17 @@
 -- Database: userdb (Docker container: postgres-user)
 -- ============================================
 
--- Función para actualizar updated_at automáticamente
-CREATE OR REPLACE FUNCTION update_updated_at_column()
-RETURNS TRIGGER AS $$
-BEGIN
-    NEW.updated_at = CURRENT_TIMESTAMP;
-    RETURN NEW;
-END;
-$$ language 'plpgsql';
-
--- Tabla users
+--tabla users
 CREATE TABLE users (
-    id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    phone VARCHAR(20),
-    address VARCHAR(255),
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT chk_name_not_empty CHECK (LENGTH(TRIM(name)) > 0),
-    CONSTRAINT chk_email_format CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$')
+                       id BIGSERIAL PRIMARY KEY,
+                       full_name VARCHAR(150) NOT NULL,
+                       email VARCHAR(120) UNIQUE NOT NULL,
+                       status VARCHAR(30) DEFAULT 'ACTIVE',
+                       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Trigger
-CREATE TRIGGER update_users_updated_at
-    BEFORE UPDATE ON users
-    FOR EACH ROW
-    EXECUTE FUNCTION update_updated_at_column();
-
--- Comentarios
-COMMENT ON TABLE users IS 'Usuarios del sistema - DB en Docker';
-COMMENT ON COLUMN users.id IS 'Identificador único del usuario';
+--data Users:
+INSERT INTO users (full_name, email, status) VALUES ('Juan Perez', 'juan.perez@example.com', 'ACTIVE');
+INSERT INTO users (full_name, email, status) VALUES ('Jhon Rodriguez', 'jrodriguez@example.com', 'ACTIVE');
+INSERT INTO users (full_name, email, status) VALUES ('Diana Tolentino', 'dtolentino@example.com', 'ACTIVE');
+commit;
