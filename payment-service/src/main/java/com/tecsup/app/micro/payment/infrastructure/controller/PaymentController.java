@@ -7,6 +7,7 @@ import com.tecsup.app.micro.payment.domain.model.Payment;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -32,7 +33,12 @@ public class PaymentController {
 
         return payment;
 
+    }
 
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Payment> findPaymentById(@PathVariable String id) {
+        Payment payment = paymentCommandHandler.getPaymentById(id);
+        return ResponseEntity.ok(payment);
     }
 }

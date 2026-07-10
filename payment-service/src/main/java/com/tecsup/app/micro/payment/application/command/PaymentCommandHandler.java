@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
 
@@ -86,4 +87,9 @@ public class PaymentCommandHandler {
         return payment;
     }
 
+    public Payment getPaymentById(String id) {
+        Payment payment =
+                createPaymentUseCase.getPaymentById(id);
+        return payment;
+    }
 }

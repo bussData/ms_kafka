@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 @Component
 @Slf4j
@@ -24,5 +25,11 @@ public class CreatePaymentUseCase {
 
         return saved;
 
+    }
+    
+    public Payment getPaymentById(String id) {
+        Payment pago = paymentRepository.findById(id)
+                .orElseThrow(()->new RuntimeException("Payment not found with id: " + id));
+        return pago;
     }
 }
