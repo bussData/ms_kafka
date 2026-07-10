@@ -207,49 +207,71 @@
       "response": []
     },
     {
-      "name": "CHECKPOINT 3---borrador",
+      "name": "9. Registrar pago",
       "request": {
-        "method": "PUT",
+        "method": "POST",
         "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"enrollmentId\":\"14\",\r\n  \"amount\":1000\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
         "url": {
-          "raw": "http://localhost:8080/api/courses/1/publish?price=10",
+          "raw": "http://localhost:8085/api/payments",
           "protocol": "http",
           "host": [
             "localhost"
           ],
-          "port": "8080",
+          "port": "8085",
           "path": [
             "api",
-            "courses",
-            "1",
-            "publish"
-          ],
-          "query": [
-            {
-              "key": "price",
-              "value": "10"
-            }
+            "payments"
           ]
         }
       },
       "response": []
     },
     {
-      "name": "Ver eventos fallidos --borrador",
+      "name": "10 . Consultar pago",
       "request": {
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8080/api/admin/dlq",
+          "raw": "http://localhost:8085/api/payments/2",
           "protocol": "http",
           "host": [
             "localhost"
           ],
-          "port": "8080",
+          "port": "8085",
           "path": [
             "api",
-            "admin",
-            "dlq"
+            "payments",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "11. Consultar usuario",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8081/api/users/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "api",
+            "users",
+            "1"
           ]
         }
       },
